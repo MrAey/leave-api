@@ -26,6 +26,7 @@ export class EmployeeModel {
       sql.where(w => w
         .where('e.first_name', 'LIKE', _query)
         .orWhere('e.last_name', 'LIKE', _query)
+        .orWhere('e.employee_id', 'LIKE', _query)
       );
     }
 
