@@ -20,6 +20,25 @@ router.get('/leave-types', async (req: Request, res: Response) => {
 
 });
 
+router.get('/count-leave', async (req: Request, res: Response) => {
+  const employeeId = req.query.employeeId || null;
+  const status = req.query.status || null;
+  const leaveTypeId = req.query.leaveTypeId || null;
+
+  try {
+    const rs: any = await leaveModel.getTypeLeave(req.db, employeeId, status, leaveTypeId);
+    res.send({ok: true, rows: rs});
+    console.log(employeeId);
+    console.log(status);
+    console.log(leaveTypeId);
+    console.log(rs);
+  } catch (e) {
+    console.log(e);
+    res.send({ok: false, error: e.message});
+  }
+
+});
+
 // CREATE
 router.post('/leaves', async (req: Request, res: Response) => {
   const periodId = req.decoded.period_id;

@@ -32,7 +32,29 @@ export class LeaveModel {
     if (employeeId) {
       sql.where('employee_id', employeeId);
     }
+    
+    return sql;
+  }
 
+  getTypeLeave(db: knex, employeeId: any, status: any, leaveTypeId: any) {
+    let sql = db('leaves')
+      .select(db.raw('sum(leave_days) as total'));
+
+    if (status) {
+      sql.where('leave_status', status);
+      console.log('status : ',status);
+    }
+
+    if (employeeId) {
+      sql.where('employee_id', employeeId);
+      console.log('employee_id : ',employeeId);
+    }
+
+    if (leaveTypeId) {
+      sql.where('leave_type_id', leaveTypeId);
+      console.log('leave_type_id : ',leaveTypeId);
+    }
+    console.log('get leave_type_id : ',sql);
     return sql;
   }
 

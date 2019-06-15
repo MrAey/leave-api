@@ -78,7 +78,7 @@ const db = knex({
   connection: connection,
   pool: {
     min: 0,
-    max: 100,
+    max: 10000,
     afterCreate: (conn: any, done: any) => {
       conn.query('SET NAMES utf8', (err: any) => {
         done(err, conn);
